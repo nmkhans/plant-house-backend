@@ -2,7 +2,9 @@ const express = require("express")
 require("dotenv").config()
 const cors = require("cors")
 const mongoose = require("mongoose")
+
 const defaultRoute = require("./src/routes/default.route")
+const handleError = require("./src/middleware/handleError")
 
 //? app configuration
 const app = express()
@@ -34,5 +36,6 @@ app.all("*", (req, res) => {
 })
 
 //? handle error
+app.use(handleError)
 
 module.exports = app
