@@ -20,4 +20,13 @@ router.post("/create", productController.createProduct)
 */
 router.get("/all", productController.getAllProduct)
 
+//? get filtered product
+/**
+ * @api (get) /product/filter 
+ * @apiDescription get filtered products
+ * @apiPermission users
+ * 
+*/
+router.get("/filter", productController.filteredProduct)
+
 module.exports = router
