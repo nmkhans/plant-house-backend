@@ -3,8 +3,9 @@ require("dotenv").config()
 const cors = require("cors")
 const mongoose = require("mongoose")
 
-const defaultRoute = require("./src/routes/default.route")
 const handleError = require("./src/middleware/handleError")
+const defaultRoute = require("./src/routes/default.route")
+const userRoute = require("./src/routes/user.route")
 
 //? app configuration
 const app = express()
@@ -26,6 +27,7 @@ mongoose.connect(uri, databaseConfig)
 
 //? handle routes
 app.use("/api/v1", defaultRoute)
+app.use("/api/v1/user", userRoute)
 
 //? handle undefined routes
 app.all("*", (req, res) => {
