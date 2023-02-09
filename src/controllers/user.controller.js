@@ -62,7 +62,7 @@ module.exports.loginUser = async (req, res, next) => {
                     { email: data.email },
                     { password: 0 }
                 );
-                
+
                 const token = jwt.sign(
                     { email: user.email },
                     process.env.TOKEN_SECRET,
@@ -89,6 +89,27 @@ module.exports.loginUser = async (req, res, next) => {
                 message: "User not found!"
             })
         }
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.updateUser = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const data = req.body;
+
+        const result = await User.updateOne(
+            { _id: id },
+            { $set: data },
+        )
+        
+        res.status(201).json({
+            success: true,
+            message: "User profile updated.",
+            data: result
+        })
 
     } catch (error) {
         next(error)
