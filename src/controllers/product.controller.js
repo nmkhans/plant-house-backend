@@ -15,3 +15,18 @@ module.exports.createProduct = async (req, res, next) => {
         next(error)
     }
 }
+
+module.exports.getAllProduct = async (req, res, next) => {
+    try {
+        const result = await Product.find()
+
+        res.status(200).json({
+            success: true,
+            message: "All product data.",
+            data: result
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}

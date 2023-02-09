@@ -11,4 +11,13 @@ const productController = require("../controllers/product.controller")
 */
 router.post("/create", productController.createProduct)
 
+//? get all product
+/**
+ * @api (get) /product/all 
+ * @apiDescription get all products
+ * @apiPermission users
+ * 
+*/
+router.get("/all", productController.getAllProduct)
+
 module.exports = router
