@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const handleError = require("./src/middleware/handleError")
 const defaultRoute = require("./src/routes/default.route")
 const userRoute = require("./src/routes/user.route")
+const productRoute = require("./src/routes/product.route")
 
 //? app configuration
 const app = express()
@@ -28,6 +29,7 @@ mongoose.connect(uri, databaseConfig)
 //? handle routes
 app.use("/api/v1", defaultRoute)
 app.use("/api/v1/user", userRoute)
+app.use("/api/v1/product", productRoute)
 
 //? handle undefined routes
 app.all("*", (req, res) => {
