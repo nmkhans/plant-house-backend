@@ -35,7 +35,7 @@ app.use("/api/v1", defaultRoute)
 app.use("/api/v1/user", userRoute)
 app.use("/api/v1/product", productRoute)
 app.use("/api/v1/upload", uploadRoute)
-app.use("/api/v1/category", categoryRoute)
+app.use("/api/v1/categories", categoryRoute)
 
 //? handle undefined routes
 app.all("*", (req, res) => {
