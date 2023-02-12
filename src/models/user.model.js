@@ -1,11 +1,7 @@
 const mongoose = require("mongoose")
 
 const schema = mongoose.Schema({
-    firstname: {
-        type: String,
-        required: true
-    },
-    lastname: {
+    name: {
         type: String,
         required: true
     },
@@ -15,7 +11,7 @@ const schema = mongoose.Schema({
         unique: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: true
     },
     image: {
