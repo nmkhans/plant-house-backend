@@ -81,3 +81,26 @@ module.exports.filteredProduct = async (req, res, next) => {
         next(error)
     }
 }
+
+module.exports.filterByCategory = async (req, res, next) => {
+    try {
+        const { pageno, perpage, category } = req.query;
+        const pageNo = parseInt(pageno)
+        const perPage = parseInt(perpage)
+        const skipRow = (pageNo - 1) * perPage
+
+        const products = await Product.find({ category: category }).skip(skipRow).limit(perPage)
+
+        const count = await Product.find({ category: category }).count()
+
+        res.status(200).json({
+            success: true,
+            message: "All data filtered by category",
+            count: count,
+            data: products
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}

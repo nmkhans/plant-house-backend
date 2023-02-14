@@ -29,4 +29,13 @@ router.get("/all", productController.getAllProduct)
 */
 router.get("/filter", productController.filteredProduct)
 
+//? get category by filter
+/**
+ * @api (get) /product/filter/category 
+ * @apiDescription get filtered products by category
+ * @apiPermission users
+ * 
+*/
+router.get("/filter/category", productController.filterByCategory)
+
 module.exports = router
