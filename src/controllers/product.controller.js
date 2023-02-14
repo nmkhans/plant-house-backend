@@ -40,7 +40,7 @@ module.exports.getAllProduct = async (req, res, next) => {
     }
 }
 
-module.exports.filteredProduct = async (req, res, next) => {
+module.exports.filterBySearch = async (req, res, next) => {
     try {
         const { pageno, perpage, search } = req.query;
         const pageNo = parseInt(pageno);
@@ -65,17 +65,7 @@ module.exports.filteredProduct = async (req, res, next) => {
                 count: count,
                 data: products
             })
-        } else {
-            const products = await Product.find({}).skip(skipRow).limit(perPage)
-            const count = await Product.find().count()
-
-            res.status(200).json({
-                success: true,
-                message: "Product filtered data.",
-                count: count,
-                data: products
-            })
-        }
+        } 
 
     } catch (error) {
         next(error)

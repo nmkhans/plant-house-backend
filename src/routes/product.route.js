@@ -27,7 +27,7 @@ router.get("/all", productController.getAllProduct)
  * @apiPermission users
  * 
 */
-router.get("/filter", productController.filteredProduct)
+router.get("/filter/search", productController.filterBySearch)
 
 //? get category by filter
 /**
