@@ -20,6 +20,15 @@ router.post("/create", productController.createProduct)
 */
 router.get("/all", productController.getAllProduct)
 
+//? get single product
+/**
+ * @api (get) /:id
+ * @apiDescription single product data
+ * @apiPermission users
+ * 
+*/
+router.get("/:id", productController.getSingleProduct)
+
 //? get filtered product
 /**
  * @api (get) /product/filter 

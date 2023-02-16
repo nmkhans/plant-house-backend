@@ -10,6 +10,7 @@ const userRoute = require("./src/routes/user.route")
 const productRoute = require("./src/routes/product.route")
 const uploadRoute = require("./src/routes/upload.route")
 const categoryRoute = require("./src/routes/category.route")
+const orderRoute = require("./src/routes/order.route")
 
 //? app configuration
 const app = express()
@@ -36,6 +37,7 @@ app.use("/api/v1/user", userRoute)
 app.use("/api/v1/product", productRoute)
 app.use("/api/v1/upload", uploadRoute)
 app.use("/api/v1/categories", categoryRoute)
+app.use("/api/v1/order", orderRoute)
 
 //? handle undefined routes
 app.all("*", (req, res) => {

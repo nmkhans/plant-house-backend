@@ -40,6 +40,23 @@ module.exports.getAllProduct = async (req, res, next) => {
     }
 }
 
+module.exports.getSingleProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const result = await Product.find({_id: id})
+
+        res.status(200).json({
+            success: true,
+            message: `Product data for id ${id}`,
+            data: result
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports.filterBySearch = async (req, res, next) => {
     try {
         const { pageno, perpage, search } = req.query;
@@ -65,7 +82,7 @@ module.exports.filterBySearch = async (req, res, next) => {
                 count: count,
                 data: products
             })
-        } 
+        }
 
     } catch (error) {
         next(error)
