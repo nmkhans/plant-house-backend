@@ -20,5 +20,26 @@ router.post("/create", orderController.createOrder)
 */
 router.get("/all", orderController.getAllOrders)
 
+//? confirm payment
+/**
+ * @api (patch) /confirm-payment
+ * @apiDescription confirm payment
+ * @apiPermission admin
+ * 
+*/
+router.patch("/confirm-payment/:id", orderController.comfirmPayment)
+
+//? update status
+/**
+ * @api (patch) /update-status
+ * @apiDescription update order status
+ * @apiPermission admin
+ * 
+*/
+router.patch("/update-status/:id", orderController.updateStatus)
+
+//? delete order
+router.delete("/delete/:id", orderController.deleteOrder)
+
 
 module.exports = router
