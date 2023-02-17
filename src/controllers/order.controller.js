@@ -1,7 +1,6 @@
 const Order = require("../models/order.model");
 const sendMail = require("../utils/sendMail");
 
-
 module.exports.createOrder = async (req, res, next) => {
     try {
         const data = req.body;
@@ -18,6 +17,22 @@ module.exports.createOrder = async (req, res, next) => {
             message: "Order has beed placed.",
             data: result
         })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.getAllOrders = async (req, res, next) => {
+    try {
+        const result = await Order.find();
+        
+        res.status(200).json({
+            success: true,
+            message: "All order data",
+            data: result
+        })
+        
 
     } catch (error) {
         next(error)
