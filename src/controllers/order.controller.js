@@ -39,6 +39,22 @@ module.exports.getAllOrders = async (req, res, next) => {
     }
 }
 
+module.exports.getOrderByUser = async (req, res, next) => {
+    try {
+        const { email } = req.params;
+        const result = await Order.find({email: email});
+        
+        res.status(200).json({
+            success: true,
+            message: "Orders list",
+            data: result
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports.comfirmPayment = async (req, res, next) => {
     try {
         const { id } = req.params;

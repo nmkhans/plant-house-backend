@@ -41,5 +41,8 @@ router.patch("/update-status/:id", orderController.updateStatus)
 //? delete order
 router.delete("/delete/:id", orderController.deleteOrder)
 
+//? get user orders
+router.get("/user/:email", orderController.getOrderByUser)
+
 
 module.exports = router
