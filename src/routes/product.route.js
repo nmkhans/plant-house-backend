@@ -47,4 +47,7 @@ router.get("/filter/search", productController.filterBySearch)
 */
 router.get("/filter/category", productController.filterByCategory)
 
+//? restock product
+router.patch("/restock/:id", productController.restockProduct)
+
 module.exports = router

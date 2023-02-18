@@ -44,7 +44,7 @@ module.exports.getSingleProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        const result = await Product.find({_id: id})
+        const result = await Product.find({ _id: id })
 
         res.status(200).json({
             success: true,
@@ -105,6 +105,30 @@ module.exports.filterByCategory = async (req, res, next) => {
             message: "All data filtered by category",
             count: count,
             data: products
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.restockProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { amount } = req.body;
+
+        const updatedDoc = {
+            $set: {
+                stock: amount
+            }
+        }
+
+        const result = await Product.updateOne({ _id: id }, updatedDoc)
+
+        res.status(200).json({
+            success: true,
+            message: "Product restocked.",
+            data: result
         })
 
     } catch (error) {
