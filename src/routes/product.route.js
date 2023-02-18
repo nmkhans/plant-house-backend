@@ -50,4 +50,7 @@ router.get("/filter/category", productController.filterByCategory)
 //? restock product
 router.patch("/restock/:id", productController.restockProduct)
 
+//? delete product
+router.delete("/delete/:id", productController.deleteProduct)
+
 module.exports = router

@@ -135,3 +135,20 @@ module.exports.restockProduct = async (req, res, next) => {
         next(error)
     }
 }
+
+module.exports.deleteProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const result = await Product.deleteOne({ _id: id })
+
+        res.status(200).json({
+            success: true,
+            message: "Product deleted.",
+            data: result
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
