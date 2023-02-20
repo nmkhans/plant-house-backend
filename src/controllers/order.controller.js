@@ -1,10 +1,22 @@
 const Order = require("../models/order.model");
+const Product = require("../models/product.model");
 const sendMail = require("../utils/sendMail");
 
 module.exports.createOrder = async (req, res, next) => {
     try {
         const data = req.body;
         const result = await Order.create(data)
+
+        const orderedProductList = result?.products;
+        orderedProductList.forEach(async (product) => {
+            const orderedProduct = await Product.findOne({ _id: product._id })
+            const orderedQuantity = product.quantity
+            const productPrevQuantity = orderedProduct.stock
+            const newInStock = productPrevQuantity - orderedQuantity
+
+            await Product.updateOne({ _id: product._id }, { $set: { stock: newInStock } })
+
+        })
 
         sendMail({
             to: data.email,
@@ -42,8 +54,8 @@ module.exports.getAllOrders = async (req, res, next) => {
 module.exports.getOrderByUser = async (req, res, next) => {
     try {
         const { email } = req.params;
-        const result = await Order.find({email: email});
-        
+        const result = await Order.find({ email: email });
+
         res.status(200).json({
             success: true,
             message: "Orders list",
