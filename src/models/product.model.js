@@ -24,6 +24,10 @@ const schema = mongoose.Schema({
     stock: {
         type: Number,
         required: true
+    },
+    reviews: {
+        type: Array,
+        default: []
     }
 
 }, { versionKey: false, timestamps: true })
