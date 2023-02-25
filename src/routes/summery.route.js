@@ -1,7 +1,9 @@
 const express = require("express")
-const summery = require("../controllers/summery.controller")
+const summeryController = require("../controllers/summery.controller")
 const router = express.Router()
 
-router.get("/", summery)
+router.get("/", summeryController.adminSummery)
+
+router.get("/:email", summeryController.userSummery)
 
 module.exports = router
