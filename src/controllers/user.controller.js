@@ -104,10 +104,60 @@ module.exports.updateUser = async (req, res, next) => {
             { _id: id },
             { $set: data },
         )
-        
+
         res.status(201).json({
             success: true,
             message: "User profile updated.",
+            data: result
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.getAllUsers = async (req, res, next) => {
+    try {
+        const { pageno, perpage } = req.query;
+        const pageNo = parseInt(pageno)
+        const perPage = parseInt(perpage)
+
+        const skipRow = (pageNo - 1) * perPage;
+
+        const users = await User.find({}, { password: 0 }).skip(skipRow).limit(perPage)
+
+        const count = await User.find().count()
+
+
+        res.status(200).json({
+            success: true,
+            message: "All User list",
+            data: users,
+            count: count
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.makeSeller = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const result = await User.updateOne(
+            { _id: id },
+            {
+                $set: {
+                    seller: true
+                }
+            },
+            { upsert: true }
+        )
+        console.log(result)
+
+        res.status(200).json({
+            success: true,
+            message: "Promoted to seller successfully.",
             data: result
         })
 

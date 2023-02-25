@@ -30,5 +30,16 @@ router.post("/login", userController.loginUser)
 */
 router.patch("/update/:id", userController.updateUser)
 
+//? get all user
+/**
+ * @api (patch) /user/all 
+ * @apiDescription get all user
+ * @apiPermission admins 
+ * 
+*/
+router.get("/all", userController.getAllUsers)
+
+router.put("/seller/:id", userController.makeSeller)
+
 
 module.exports = router

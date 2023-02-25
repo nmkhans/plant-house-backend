@@ -25,6 +25,10 @@ const schema = mongoose.Schema({
     role: {
         type: String,
         default: "user"
+    },
+    seller: {
+        type: Boolean,
+        default: false
     }
 }, { versionKey: false, timestamps: true })
 
