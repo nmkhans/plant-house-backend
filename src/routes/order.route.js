@@ -44,5 +44,11 @@ router.delete("/delete/:id", orderController.deleteOrder)
 //? get user orders
 router.get("/user/:email", orderController.getOrderByUser)
 
+//? get single order
+router.get("/:id", orderController.getSingleOrder)
+
+//? add a review
+router.post("/review/add/:id", orderController.addReview)
+
 
 module.exports = router

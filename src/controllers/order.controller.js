@@ -51,6 +51,22 @@ module.exports.getAllOrders = async (req, res, next) => {
     }
 }
 
+module.exports.getSingleOrder = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const result = await Order.find({ _id: id });
+
+        res.status(200).json({
+            success: true,
+            message: "All order data",
+            data: result
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports.getOrderByUser = async (req, res, next) => {
     try {
         const { email } = req.params;
@@ -143,6 +159,40 @@ module.exports.deleteOrder = async (req, res, next) => {
             data: result
         })
 
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.addReview = async (req, res, next) => {
+    try {
+        const reviewData = req.body;
+        
+        const review = {
+            name: reviewData.name,
+            email: reviewData.email,
+            image: reviewData.image,
+            description: reviewData.description,
+            rating: reviewData.rating
+        }
+
+        reviewData.products.forEach(async (product) => {
+            const productId = product._id
+            const productData = await Product.findOne({ _id: productId })
+            const updatedReviews = [...productData.reviews, review]
+
+            await Product.updateOne({ _id: productId }, {
+                $set: {
+                    reviews: updatedReviews
+                }
+            })
+        })
+
+        res.status(200).json({
+            success: true,
+            message: "Review successfully added.",
+        })
 
     } catch (error) {
         next(error)
