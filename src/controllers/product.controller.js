@@ -152,3 +152,14 @@ module.exports.deleteProduct = async (req, res, next) => {
         next(error)
     }
 }
+
+module.exports.getReviews = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        
+        const result = await Product.find()
+
+    } catch (error) {
+
+    }
+}

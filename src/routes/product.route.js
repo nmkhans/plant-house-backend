@@ -53,4 +53,7 @@ router.patch("/restock/:id", productController.restockProduct)
 //? delete product
 router.delete("/delete/:id", productController.deleteProduct)
 
+//? get reviews
+router.get("/reviews/:id", productController.getReviews)
+
 module.exports = router
