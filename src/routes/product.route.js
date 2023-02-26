@@ -54,7 +54,7 @@ router.patch("/restock/:id", productController.restockProduct)
 router.delete("/delete/:id", productController.deleteProduct)
 
 //? get reviews
-// router.get("/reviews/:id", productController.getReviews)
+router.get("/get/reviews", productController.getReviews)
 
 //? get recomended products
 router.get("/get/recomended", productController.getRecomendedProducts)
