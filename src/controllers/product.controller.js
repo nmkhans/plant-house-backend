@@ -155,9 +155,38 @@ module.exports.deleteProduct = async (req, res, next) => {
 
 module.exports.getReviews = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        
-        const result = await Product.find()
+        /* const { id } = req.params;
+
+        const result = await Product.find() */
+
+    } catch (error) {
+
+    }
+}
+
+module.exports.getRecomendedProducts = async (req, res, next) => {
+    try {
+        let recomendedProducts = [];
+
+        const products = await Product.find();
+        products.forEach(product => {
+            const totalRatings = parseFloat(product.reviews.reduce((prev, value) => {
+                return prev + value.rating
+            }, 0))
+
+            const totalReview = product.reviews.length;
+            const rating = parseFloat((totalRatings / totalReview)) || 0;
+
+            if (rating > 4.5) {
+                recomendedProducts.push(product)
+            }
+        })
+
+        res.status(200).json({
+            success: true,
+            message: "Recomended products",
+            data: recomendedProducts
+        })
 
     } catch (error) {
 
