@@ -12,6 +12,7 @@ const uploadRoute = require("./src/routes/upload.route")
 const categoryRoute = require("./src/routes/category.route")
 const orderRoute = require("./src/routes/order.route")
 const summeryRoute = require("./src/routes/summery.route")
+const podcastRoute = require("./src/routes/podcast.route")
 
 //? app configuration
 const app = express()
@@ -40,6 +41,7 @@ app.use("/api/v1/upload", uploadRoute)
 app.use("/api/v1/categories", categoryRoute)
 app.use("/api/v1/order", orderRoute)
 app.use("/api/v1/summery", summeryRoute)
+app.use("/api/v1/podcast", podcastRoute)
 
 //? handle undefined routes
 app.all("*", (req, res) => {
