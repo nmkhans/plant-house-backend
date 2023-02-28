@@ -153,11 +153,34 @@ module.exports.makeSeller = async (req, res, next) => {
             },
             { upsert: true }
         )
-        console.log(result)
 
         res.status(200).json({
             success: true,
             message: "Promoted to seller successfully.",
+            data: result
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.makeAdmin = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const result = await User.updateOne(
+            { _id: id },
+            {
+                $set: {
+                    role: "admin"
+                }
+            },
+            { upsert: true }
+        )
+
+        res.status(200).json({
+            success: true,
+            message: "Promoted to admin successfully.",
             data: result
         })
 

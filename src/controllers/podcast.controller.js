@@ -29,3 +29,19 @@ module.exports.addPodcast = async (req, res, next) => {
     next(error)
   }
 }
+
+module.exports.deletePodcasts = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await Podcast.deleteOne({ _id: id })
+
+    res.status(200).json({
+      success: true,
+      message: "Podcast deleted!",
+      data: result
+    })
+  } catch (error) {
+    next(error)
+  }
+}

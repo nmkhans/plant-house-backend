@@ -41,5 +41,7 @@ router.get("/all", userController.getAllUsers)
 
 router.put("/seller/:id", userController.makeSeller)
 
+router.put("/make-admin/:id", userController.makeAdmin)
+
 
 module.exports = router

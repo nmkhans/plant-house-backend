@@ -6,4 +6,6 @@ router.get("/all", podcastController.getAllPodcast);
 
 router.post("/create", podcastController.addPodcast)
 
+router.delete("/delete/:id", podcastController.deletePodcasts)
+
 module.exports = router;
